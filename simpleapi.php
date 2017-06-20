@@ -1,13 +1,23 @@
 <?php
 
-//http://www.tutorialsface.com/2016/02/simple-php-mysql-rest-api-sample-example-tutorial's     
+//*****************************************************************************************
+// 										Simpleapi.php
+//*****************************************************************************************
+
+
+
+//reference *******************************************************************************
+//http://www.tutorialsface.com/2016/02/simple-php-mysql-rest-api-sample-example-tutorial's  
+//*****************************************************************************************
+
+   
 require_once("Rest.inc.php");
 
 class API extends REST {
 
     public $data = "";
 
-    //Enter details of your database
+    //Enter details of our database
     //const DB_SERVER = "127.0.0.1:3306";
     const DB_SERVER = "62.38.149.10:3333";
     //const DB_USER = "root";
@@ -41,29 +51,19 @@ class API extends REST {
         if ((int) method_exists($this, $func) > 0)
             $this->$func();
         else
-            $this->response('Error code 404, Page not found', 404);   // If the method not exist with in this class, response would be "Page not found".
+			// If the method not exist with in this class, response would be "Page not found".
+            $this->response('Error code 404, Page not found', 404);   
     }
-
-    /*  private function hello() {
-      echo str_replace("this", "that", "HELLO WORLD!!");
-      } */
-
-    /* private function test() {
-      // Cross validation if the request method is GET else it will return "Not Acceptable" status
-      if ($this->get_request_method() != "GET") {
-      $this->response('', 406);
-      }
-      $myDatabase = $this->db; // variable to access your database
-      $param = $this->_request['var'];
-      // If success everythig is good send header as "OK" return param
-      $this->response($param, 200);
-      } */
+	
+//*****************************************************************************************
+// 										createdbtables
+//*****************************************************************************************
 
     private function createdbtables() {
         if ($this->get_request_method() != "GET") {
             $this->response('', 406);
         }
-
+		// create our table yugisaves (2 columns table) 
         $result = mysql_query('CREATE TABLE `yugisaves` (
                                 `unkey` varchar(128) NOT NULL,
                                 `json` longtext
@@ -82,13 +82,16 @@ class API extends REST {
         $dbdata['db'] = 'ok';
         $this->response($this->json($dbdata), 200);
     }
+//*****************************************************************************************
+// 										dropdbtables
+//*****************************************************************************************
 
     private function dropdbtables() {
         if ($this->get_request_method() != "GET") {
             $this->response('', 406);
         }
 
-
+		// drop our table yugisaves (2 columns table) 
         $result = mysql_query('drop TABLE yugisaves', $this->db);
         if (!$result) {
             die($this->response('Invalid query: ' . mysql_error(), 500));
@@ -98,6 +101,10 @@ class API extends REST {
         $this->response($this->json($dbdata), 200);
     }
 
+//*****************************************************************************************
+// 										getuserdata
+//*****************************************************************************************
+	
     private function getuserdata() {
         if ($this->get_request_method() != "GET") {
             $this->response('', 406);
@@ -113,9 +120,12 @@ class API extends REST {
 
         $dbdata['data'] = $row[0];
 
-        //$this->response($this->json($dbdata), 200);
         $this->response($this->json($dbdata), 200);
     }
+
+//*****************************************************************************************
+// 										setuserdata
+//*****************************************************************************************
 
     private function setuserdata() {
         if ($this->get_request_method() != "POST") {
@@ -130,8 +140,6 @@ class API extends REST {
         if (!$result) {
             die($this->response('Invalid query: ' . mysql_error(), 500));
         }
-
-
 
         $dbdata['data'] = 'OK';
         $this->response($this->json($dbdata), 200);
