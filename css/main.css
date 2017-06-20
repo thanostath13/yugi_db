@@ -1,0 +1,44 @@
+/******************************************************************************/
+/*                                 Main Css                                   */ 
+/******************************************************************************/  
+
+.yugiitemempty{
+    height: 100px;
+
+}
+
+.yugiitem .desc{
+    padding-left: 50px;
+}
+
+.yugiitem{
+    cursor: pointer;
+}
+
+.yugiitem img{
+    height: 50px;
+}
+
+.popover-content {
+
+    overflow-y: auto;
+}
+
+.detailview h2{
+
+    margin-top: -20px;
+}
+
+
+.markiza{
+    padding:20px;  
+    height:50px;	
+}
+
+.mark{
+    padding-bottom: 3px;
+}
+
+.markcontent span{
+    cursor: pointer;
+}
