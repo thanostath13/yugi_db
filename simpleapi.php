@@ -1,16 +1,14 @@
 <?php
 
 //*****************************************************************************************
-// 										Simpleapi.php
+//                                      Simpleapi.php
 //*****************************************************************************************
-
-
-
-//reference *******************************************************************************
+//
+////reference *****************************************************************************
 //http://www.tutorialsface.com/2016/02/simple-php-mysql-rest-api-sample-example-tutorial's  
 //*****************************************************************************************
 
-   
+
 require_once("Rest.inc.php");
 
 class API extends REST {
@@ -51,19 +49,19 @@ class API extends REST {
         if ((int) method_exists($this, $func) > 0)
             $this->$func();
         else
-			// If the method not exist with in this class, response would be "Page not found".
-            $this->response('Error code 404, Page not found', 404);   
+        // If the method not exist with in this class, response would be "Page not found".
+            $this->response('Error code 404, Page not found', 404);
     }
-	
+
 //*****************************************************************************************
-// 										createdbtables
+//                                     createdbtables
 //*****************************************************************************************
 
     private function createdbtables() {
         if ($this->get_request_method() != "GET") {
             $this->response('', 406);
         }
-		// create our table yugisaves (2 columns table) 
+        // create our table yugisaves (2 columns table) 
         $result = mysql_query('CREATE TABLE `yugisaves` (
                                 `unkey` varchar(128) NOT NULL,
                                 `json` longtext
@@ -82,8 +80,9 @@ class API extends REST {
         $dbdata['db'] = 'ok';
         $this->response($this->json($dbdata), 200);
     }
+
 //*****************************************************************************************
-// 										dropdbtables
+// 					dropdbtables
 //*****************************************************************************************
 
     private function dropdbtables() {
@@ -91,7 +90,7 @@ class API extends REST {
             $this->response('', 406);
         }
 
-		// drop our table yugisaves (2 columns table) 
+        // drop our table yugisaves (2 columns table) 
         $result = mysql_query('drop TABLE yugisaves', $this->db);
         if (!$result) {
             die($this->response('Invalid query: ' . mysql_error(), 500));
@@ -102,9 +101,9 @@ class API extends REST {
     }
 
 //*****************************************************************************************
-// 										getuserdata
+//                              	getuserdata
 //*****************************************************************************************
-	
+
     private function getuserdata() {
         if ($this->get_request_method() != "GET") {
             $this->response('', 406);
@@ -124,7 +123,7 @@ class API extends REST {
     }
 
 //*****************************************************************************************
-// 										setuserdata
+//                  			setuserdata
 //*****************************************************************************************
 
     private function setuserdata() {
