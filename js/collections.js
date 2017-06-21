@@ -14,14 +14,12 @@ app.CardC = Backbone.Collection.extend({
             card.set('id', card.cid);
             //make a new list item in our View 
             new app.ColItemView({model: card});
-            // From local storage to db ***************************** Start
             //Save item to our local storage 
             //this.saveTolocalStorage();
-            
             if (this.loading === false) {
                 this.saveToDb();
             }
-            // From local storage to db ***************************** End
+
         });
         this.on("remove", function (card) {
             // remove list view from dom
@@ -29,23 +27,24 @@ app.CardC = Backbone.Collection.extend({
             //Save to our local storage this remove
             this.saveTolocalStorage();
         });
-        //get userid from Local Storage 
+        //get userid from Local Storage
         this.userid = this.getIdFromLocalStorage();
 
-        // From local storage to db ***************************** Start
+
         // load collection from local storage
         //this.loadFromLocalStorage();
 
-        //flag to stop autosave until loading finished
-        this.loading = true;
+
         //load from db
+
+        this.loading = true;//flag to stop autosave.. until loading finished..
         this.loadFromDb(this);
-        // From local storage to db ***************************** End
+
+
     },
     getIdFromLocalStorage: function () {
         var stored = localStorage.getItem('yugiuserid');
         var id;
-        // From local storage to db ***************************** Start
         if (stored !== null) {
             id = stored;
         } else {
@@ -53,7 +52,6 @@ app.CardC = Backbone.Collection.extend({
             localStorage.setItem('yugiuserid', id);
         }
         return id;
-        // From local storage to db ***************************** End
     },
     // function for loading our card collection from local storage
     loadFromLocalStorage: function () {
@@ -77,54 +75,69 @@ app.CardC = Backbone.Collection.extend({
             this.add(card);
         }
     },
-    // From local storage to db *************************************** Start
-    // function for loading our card collection from database
+    // function for loading our card collection from local storage
     loadFromDb: function (collection) {
         $.ajax({
             type: 'GET',
             url: myapiurl + '?request=getuserdata&user=' + this.userid,
-            error: function () {
-                //
+            error: function (data) {
+              console.log(data);
             },
-            success: function (data) {
+            success: function (resp) {
+				console.log(resp);
+							try {
+							 
+							//var saved  = resp;
+							var savedcards = JSON.parse(resp);
+							if (savedcards !== null) {
+								for (var i = 0; i < savedcards.length; i++) {
+									var cardm = new app.CardM(savedcards[i]);
+									collection.add(cardm);
+								}
+								//collection.loading = false;
+							}
+				}
+				catch(e) {
+				   //console.log(resp);
+				}
+			collection.loading = false;
+			
+               
 
-                var savedcards = JSON.parse(data.data);
-                if (savedcards !== null) {
-                    for (var i = 0; i < savedcards.length; i++) {
-                        var cardm = new app.CardM(savedcards[i]);
-                        collection.add(cardm);
-                    }
-                    collection.loading = false;
-                }
             },
             crossDomain: true
         });
+
     },
-    // save to our DB
     saveToDb: function () {
         $.ajax({
             type: 'POST',
             url: myapiurl + '?request=setuserdata',
             error: function () {
-                myapp.dialogAlert('Error Saving Data', 'An unexpected error has occurred', 'glyphicon-exclamation-sign');
+                myapp.dialogAlert('Error Saving Data', 'An unexedasda hsau hasdu hasdu iahdui ahd ua hs udashd uuh uah d', 'glyphicon-exclamation-sign');
             },
             data: {
                 data: JSON.stringify(this.toJSON()),
+                //data: this.toJSON(),
                 user: this.userid
             },
             success: function (data) {
-                console.log("Saved sucessfully");
+                console.log(data);
             },
             crossDomain: true
         });
+
+
     },
-    // function to create random id
     randomString: function (length, chars) {
         var result = '';
         for (var i = length; i > 0; --i)
             result += chars[Math.floor(Math.random() * chars.length)];
         return result;
     }
-// From local storage to db ********************************************* End
+
+
+
+
 });
 

@@ -14,7 +14,7 @@ var decklimit = 30;
 var apiurl = 'https://crossorigin.me/http://yugiohprices.com/api';
 
 //var myapiurl = 'http://127.0.0.1:8080/yugi-master/simpleapi.php';
-var myapiurl = 'http://seanatk.gr/simpleapi.php';
+var myapiurl = 'http://thanostath.000webhostapp.com/simpleapi.php';
 
 
 var tempdetail;
