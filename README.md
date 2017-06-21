@@ -9,7 +9,7 @@
 
 ### Diagram
 
-![Yu Gi Oh](https://github.com/thanostath13/yugi/blob/master/img/yugi_diagram1.jpg "Simple Yu Gi Oh! Deck Browser diagram")
+![Yu Gi Oh](https://github.com/thanostath13/yugi_db/blob/master/img/yugi_diagram1.jpg "Simple Yu Gi Oh! Deck Browser diagram")
 
 ***
 
