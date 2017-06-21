@@ -13,7 +13,6 @@ var decklimit = 30;
 // Cors Productive Api Url
 var apiurl = 'https://crossorigin.me/http://yugiohprices.com/api';
 
-//var myapiurl = 'http://127.0.0.1:8080/yugi-master/simpleapi.php';
 var myapiurl = 'https://thanostath.000webhostapp.com/simpleapi.php';
 
 
