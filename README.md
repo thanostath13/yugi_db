@@ -13,7 +13,7 @@
 
 ***
 
-### Στο παρακατω link μπορειται να βρειτε μια live έκδοση της συγκεκριμενης εφαρμογης
+### Στο παρακατω link μπορείτε να βρείτε μια live έκδοση της συγκεκριμενης εφαρμογης
 
 * [Simple Yu Gi Oh! Deck Browser](https://thanostath13.github.io/yugi_db/ "Simple Yu Gi Oh! Deck Browser")
 
