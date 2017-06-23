@@ -18,10 +18,10 @@ class API extends REST {
     public $data = "";
 
     //Enter details of our databas
-    const DB_SERVER = "62.38.149.10:3333";
-    const DB_USER = "thanasis";
-    const DB_PASSWORD = "thanasis12!!";
-    const DB = "thanasis";
+    const DB_SERVER = "***********";
+    const DB_USER = "*******";
+    const DB_PASSWORD = "********!!";
+    const DB = "*******";
 
     private $db = NULL;
 
